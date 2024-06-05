@@ -86,7 +86,7 @@ model.add(Dense(1))
 #모델 실행
 model.compile(optimizer ='adam', loss = 'mean_squared_error')
 
-# 20회 이상 결과가 향상되지 않으면 자동으로 중단.
+# 20회 이상 결과가 향상되지 않으면 자동으로 중단
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=20)
 
 # 모델 이름
@@ -113,7 +113,7 @@ for i in range(25):
     pred_prices.append(prediction)
     n_iter = n_iter + 1
     X_num.append(n_iter)
-    # 샘플 25개의 그래프
+# 샘플 25개의 그래프
 
     plt.plot(X_num, pred_prices, label='predicted price')
     plt.plot(X_num, real_prices, label='real price')
