@@ -1,4 +1,5 @@
 ![image](https://github.com/gryrryfh/AI-Class/assets/50912987/e98a9db8-3041-42e1-af3c-e055e45b24b6)
+
 ```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -26,7 +27,9 @@ history=model.fit(X_train, y_train, epochs=50, batch_size=500, validation_split=
 score=model.evaluate(X_test, y_test)
 print('Test accuracy:', score[1])
 ```
+
 ![image](https://github.com/gryrryfh/AI-Class/assets/50912987/f299a42c-cc4c-4fb2-89d5-58f7a8dbc99b)
+
 ```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
