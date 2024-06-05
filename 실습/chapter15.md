@@ -1,5 +1,6 @@
-## 데이터 파악
-![image](https://github.com/gryrryfh/AI-Class/assets/50912987/08d04782-29bb-4685-8be2-fb82a4b68e1a)
+## 데이터 파악  
+  
+![image](https://github.com/gryrryfh/AI-Class/assets/50912987/08d04782-29bb-4685-8be2-fb82a4b68e1a)  
 
 ```python
 from tensorflow.keras.models import Sequential
@@ -18,8 +19,9 @@ df = pd.get_dummies(df)
 df = df.fillna(df.mean())
 print(df)
 ```
-## 속성별 관련도 추출
-![image](https://github.com/gryrryfh/AI-Class/assets/50912987/9fe5ee0a-7b88-4612-a470-6ed5f7fe324e)
+## 속성별 관련도 추출  
+  
+![image](https://github.com/gryrryfh/AI-Class/assets/50912987/9fe5ee0a-7b88-4612-a470-6ed5f7fe324e)  
 ```python
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
