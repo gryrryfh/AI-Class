@@ -68,42 +68,41 @@ df = df.fillna(df.mean())
 df_corr=df.corr()
 #집 값과 관련이 큰 것부터 순서대로 저장
 df_corr_sort=df_corr.sort_values('SalePrice', ascending=False)
-#집 값을 제외한 나머지 열을 저장합니다.
+#집 값을 제외한 나머지 열을 저장
 cols_train=['OverallQual','GrLivArea','GarageCars','GarageArea','TotalBsmtSF']
 X_train_pre = df[cols_train]
 
-#집 값을 저장합니다.
+#집 값
 y = df['SalePrice'].values
-#전체의 80%를 학습셋으로, 20%를 테스트셋으로 지정합니다.
+#전체의 80%를 학습셋으로, 20%를 테스트셋으로 지정
 X_train, X_test, y_train, y_test = train_test_split(X_train_pre, y, test_size=0.2)
-#모델의 구조를 설정합니다.
+#모델의 구조를 설정
 model = Sequential()
 model.add(Dense(10, input_dim=X_train.shape[1], activation='relu'))
 model.add(Dense(30, activation='relu'))
 model.add(Dense(40, activation='relu'))
 model.add(Dense(1))
-model.summary()
 
-#모델을 실행합니다.
+#모델 실행
 model.compile(optimizer ='adam', loss = 'mean_squared_error')
 
-# 20회 이상 결과가 향상되지 않으면 자동으로 중단되게끔 합니다.
+# 20회 이상 결과가 향상되지 않으면 자동으로 중단.
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=20)
 
-# 모델의 이름을 정합니다.
+# 모델 이름
 modelpath="C:/Users/jaegy/pythonProject2/data/model/Ch15-house.hdf5"
 
-# 최적화 모델을 업데이트하고 저장합니다.
+# 최적화 모델 업데이트, 저장
 checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=0, save_best_only=True)
 
-#실행 관련 설정을 하는 부분입니다. 전체의 20%를 검증셋으로 설정합니다.
+#실행 관련 설정(전체의 20%를 검증셋으로 설정)
 history = model.fit(X_train, y_train, validation_split=0.25, epochs=2000, batch_size=32, callbacks=[early_stopping_callback, checkpointer])
-# 예측 값과 실제 값, 실행 번호가 들어갈 빈 리스트를 만듭니다.
+# 예측 값과 실제 값, 실행 번호가 들어갈 빈 리스트 생성
 real_prices =[]
 pred_prices = []
 X_num = []
 
-# 25개의 샘플을 뽑아 실제 값, 예측 값을 출력해 봅니다.
+# 25개의 샘플의 실제 값, 예측 값
 n_iter = 0
 Y_prediction = model.predict(X_test).flatten()
 for i in range(25):
@@ -114,7 +113,7 @@ for i in range(25):
     pred_prices.append(prediction)
     n_iter = n_iter + 1
     X_num.append(n_iter)
-    # 그래프를 통해 샘플로 뽑은 25개의 값을 비교해 봅니다.
+    # 샘플 25개의 그래프
 
     plt.plot(X_num, pred_prices, label='predicted price')
     plt.plot(X_num, real_prices, label='real price')
